@@ -80,6 +80,10 @@ module Yookassa
       class Webmoney < Base
         attribute :type, Types.Value("webmoney")
       end
+
+      class Sbp < Base
+        attribute :type, Types.Value("sbp")
+      end
     end
 
     PaymentMethods = PaymentMethod::BankCard |
@@ -94,6 +98,7 @@ module Yookassa
                      PaymentMethod::Qiwi |
                      PaymentMethod::Tinkoff |
                      PaymentMethod::Wechat |
-                     PaymentMethod::Webmoney
+                     PaymentMethod::Webmoney |
+                     PaymentMethod::Spb
   end
 end
