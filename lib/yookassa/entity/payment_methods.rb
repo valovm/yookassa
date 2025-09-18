@@ -99,6 +99,6 @@ module Yookassa
                      PaymentMethod::Tinkoff |
                      PaymentMethod::Wechat |
                      PaymentMethod::Webmoney |
-                     PaymentMethod::Spb
+                     PaymentMethod::Sbp
   end
 end
