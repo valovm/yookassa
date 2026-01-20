@@ -21,7 +21,15 @@ module Yookassa
         # Information on whether the 3-D Secure authentication form is displayed to the user for confirming the payment or not.
         # true: YooMoney displayed the form to the user, so that they could complete 3-D Secure authentication;
         # false: payment was processed without 3-D Secure authentication.
-        applied: Types::Bool
+        applied: Types::Bool,
+
+        # method_completed [boolean, optional]
+        # Information on whether the 3‑D Secure method was completed.
+        method_completed?: Types::Bool,
+
+        # challenge_completed [boolean, optional]
+        # Information on whether the 3‑D Secure challenge was completed.
+        challenge_completed?: Types::Bool
       ).with_key_transform(&:to_sym)
     end
   end

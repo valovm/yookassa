@@ -1,0 +1,41 @@
+{
+  "id": "30fea5b4-000f-5001-8000-1ee0c9c8d752",
+  "status": "pending",
+  "paid": false,
+  "amount": {
+    "value": "10.00",
+    "currency": "RUB"
+  },
+  "confirmation": {
+    "type": "redirect",
+    "return_url": "https://url.test",
+    "confirmation_url": "https://money.yookassa.ru/payments/external/confirmation?orderId=30fea5b4-000f-5001-8000-1ee0c9c8d752"
+  },
+  "created_at": "2026-01-18T07:55:33.054Z",
+  "metadata": {},
+  "payment_method": {
+    "type": "bank_card",
+    "id": "30fea5b4-000f-5001-8000-1ee0c9c8d752",
+    "saved": false,
+    "status": "inactive",
+    "title": "Bank card *8159",
+    "card": {
+      "first6": "220432",
+      "last4": "8159",
+      "expiry_year": "2030",
+      "expiry_month": "04",
+      "card_type": "Mir",
+      "card_product": { "code": "TKN", "name": "MIR Token Debit" },
+      "issuer_country": "RU",
+      "issuer_name": "OZON Bank Limited Liability Company",
+      "source": "mir_pay"
+    }
+  },
+  "recipient": {
+    "account_id": 54401,
+    "gateway_id": 289250
+  },
+  "refundable": false,
+  "test": true
+}
+

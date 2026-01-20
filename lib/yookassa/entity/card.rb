@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
 require_relative "./types"
+require_relative "./card_product"
 
 module Yookassa
   module Entity
     class Card < Dry::Struct
+      Sources = Types::String.enum("apple_pay", "google_pay", "mir_pay")
+      ExpiryField = Types::Coercible::Integer | Types::String
+
       # first6 [string, optional]
       # First 6 digits of the card’s number (BIN). For payments with bank cards saved in YooMoney
       # and other services, the specified BIN might not correspond with the last4, expiry_year, expiry_month values.
@@ -17,11 +21,11 @@ module Yookassa
 
       # expiry_month [string, required]
       # Expiration date, month, MM.
-      attribute? :expiry_month, Types::Coercible::Integer
+      attribute? :expiry_month, ExpiryField
 
       # expiry_year [string, required]
       # Expiration date, year, YYYY.
-      attribute? :expiry_year, Types::Coercible::Integer
+      attribute? :expiry_year, ExpiryField
 
       # card_type [string, required]
       # Type of bank card. Possible values: MasterCard (for Mastercard and Maestro cards), Visa (for Visa and Visa Electron cards),
@@ -36,10 +40,14 @@ module Yookassa
       # Name of the issuing bank.
       attribute? :issuer_name, Types::String
 
+      # card_product [object, optional]
+      # Card product details (returned for some cards, e.g. tokenized Mir cards).
+      attribute? :card_product, CardProduct
+
       # source [string, optional]
-      # Source of bank card details. Possible values: apple_pay, google_pay.
+      # Source of bank card details. Possible values: apple_pay, google_pay, mir_pay.
       # For payments where the user selects a card saved in Apple Pay or Google Pay.
-      attribute? :source, Types::String.enum("apple_pay", "google_pay")
+      attribute? :source, Sources
     end
   end
 end

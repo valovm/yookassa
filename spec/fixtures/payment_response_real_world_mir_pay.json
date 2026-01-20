@@ -1,0 +1,44 @@
+{
+  "id": "30fea5b4-000f-5001-8000-1ee0c9c8d752",
+  "status": "succeeded",
+  "amount": { "value": "500.00", "currency": "RUB" },
+  "income_amount": { "value": "474.65", "currency": "RUB" },
+  "description": "Заказ № P4616-1",
+  "recipient": { "account_id": "1202581", "gateway_id": "2568407" },
+  "payment_method": {
+    "type": "bank_card",
+    "id": "30fea5b4-000f-5001-8000-1ee0c9c8d752",
+    "saved": false,
+    "status": "inactive",
+    "title": "Bank card *8159",
+    "card": {
+      "first6": "220432",
+      "last4": "8159",
+      "expiry_year": "***",
+      "expiry_month": "***",
+      "card_type": "Mir",
+      "card_product": { "code": "TKN", "name": "MIR Token Debit" },
+      "issuer_country": "RU",
+      "issuer_name": "OZON Bank Limited Liability Company",
+      "source": "mir_pay"
+    }
+  },
+  "captured_at": "2026-01-18T07:55:54.534Z",
+  "created_at": "2026-01-18T07:55:33.009Z",
+  "test": false,
+  "refunded_amount": { "value": "0.00", "currency": "RUB" },
+  "paid": true,
+  "refundable": true,
+  "receipt_registration": "succeeded",
+  "metadata": { "order_id": "cdbe81b4-4def-4955-b9be-72bfa82ad1e3" },
+  "authorization_details": {
+    "rrn": "601818497215",
+    "auth_code": "070221",
+    "three_d_secure": {
+      "applied": false,
+      "method_completed": false,
+      "challenge_completed": false
+    }
+  }
+}
+

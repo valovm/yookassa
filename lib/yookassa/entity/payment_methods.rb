@@ -10,6 +10,7 @@ module Yookassa
         attribute :id, Types::String
         attribute :saved, Types::Bool
         attribute? :title, Types::String
+        attribute? :status, Types::String
       end
 
       class BankCard < Base
