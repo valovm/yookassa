@@ -87,19 +87,52 @@ module Yookassa
       end
     end
 
-    PaymentMethods = PaymentMethod::BankCard |
-                     PaymentMethod::Alfabank |
-                     PaymentMethod::YooMoney |
-                     PaymentMethod::Sberbank |
-                     PaymentMethod::ApplePay |
-                     PaymentMethod::Cash |
-                     PaymentMethod::DirectCarrierBilling |
-                     PaymentMethod::GooglePay |
-                     PaymentMethod::Installments |
-                     PaymentMethod::Qiwi |
-                     PaymentMethod::Tinkoff |
-                     PaymentMethod::Wechat |
-                     PaymentMethod::Webmoney |
-                     PaymentMethod::Sbp
+    PAYMENT_METHOD_CLASS_BY_TYPE = {
+      "bank_card" => PaymentMethod::BankCard,
+      "alfabank" => PaymentMethod::Alfabank,
+      "yoo_money" => PaymentMethod::YooMoney,
+      "sberbank" => PaymentMethod::Sberbank,
+      "apple_pay" => PaymentMethod::ApplePay,
+      "cash" => PaymentMethod::Cash,
+      "mobile_balance" => PaymentMethod::DirectCarrierBilling,
+      "google_pay" => PaymentMethod::GooglePay,
+      "installments" => PaymentMethod::Installments,
+      "qiwi" => PaymentMethod::Qiwi,
+      "tinkoff_bank" => PaymentMethod::Tinkoff,
+      "wechat" => PaymentMethod::Wechat,
+      "webmoney" => PaymentMethod::Webmoney,
+      "sbp" => PaymentMethod::Sbp
+    }.freeze
+
+    def self.deep_symbolize_keys(value)
+      case value
+      when Hash
+        value.each_with_object({}) do |(k, v), acc|
+          key = k.is_a?(String) ? k.to_sym : k
+          acc[key] = deep_symbolize_keys(v)
+        end
+      when Array
+        value.map { |v| deep_symbolize_keys(v) }
+      else
+        value
+      end
+    end
+
+    PaymentMethods = Types::Any
+      .constructor do |value|
+        next value if value.nil? || value.is_a?(PaymentMethod::Base)
+
+        unless value.is_a?(Hash)
+          value
+        else
+          attrs = Entity.deep_symbolize_keys(value)
+          type = attrs[:type]&.to_s
+          klass = PAYMENT_METHOD_CLASS_BY_TYPE[type]
+          raise Dry::Struct::Error, "Unknown payment_method type: #{type.inspect}" unless klass
+
+          klass.new(attrs)
+        end
+      end
+      .constrained(type: PaymentMethod::Base)
   end
 end
